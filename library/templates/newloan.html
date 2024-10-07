@@ -1,0 +1,52 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel="stylesheet" href="{% static 'style.css' %}" />
+   </head>
+   <body>
+      <nav class="navbar">
+         <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all_books' %}">All Books</a></li>
+            <li><a href="{% url 'all_members' %}">All Members</a></li>
+            <li><a href="{% url 'login' %}">Log out</a></li>
+            <li><a href="{% url 'loans' %}">Loans</a></li>
+            <li><a href="{% url 'reg_member' %}">Register Member</a></li>
+            <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
+         </ul>
+      </nav>
+
+      <div class="loan-form">
+         {% if messages %}
+         <ul class="messages">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+         </ul>
+         {% endif %}
+         <form method="POST">
+            {% csrf_token %}
+
+            <label for="membername">Member Name</label>
+            <input type="text" name="membername" placeholder="Enter member name"/>
+
+            <label for="member_email">Member's Email</label>
+            <input type="email" name="member_email" placeholder="Enter member's email"/>
+
+            <label for="title">Book Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter book title"/>
+
+            <label for="loan_date">Loan Date</label>
+            <input type="date" id="loan_date" name="loan_date" />
+
+            <label for="return_date">Return Date</label>
+            <input type="date" id="return_date" name="return_date" />
+
+            <input type="submit" value="Loan Book" />
+         </form>
+
+         
+      </div>
+   </body>
+</html>

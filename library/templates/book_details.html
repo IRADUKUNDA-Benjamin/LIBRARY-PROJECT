@@ -1,0 +1,19 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+   <head> 
+      <link rel="stylesheet" href="{% static 'style.css' %}"
+   </head>
+   <body>
+      <div class='container book_deails'>
+         <h1>BOOK DETAILS</h1>
+         <p>Book title: {{obj.title}}</p>
+         <p>Book author: {{obj.author}}</p>
+         <p>Book price: {{obj.price}}</p>
+         <p>Book genre:{{obj.genre}}</p>
+         <p>Book ISBN:{{obj.ISBN}}</p>
+         <p>Publication's date:{{obj.publication_date}}</p>
+         <p>Copies available:{{obj.available_copies}}</p>
+      </div>
+   </body>
+</html>

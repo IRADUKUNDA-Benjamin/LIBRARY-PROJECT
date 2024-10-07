@@ -1,0 +1,44 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel="stylesheet" href={% static 'style.css' %}>
+   </head>
+   <body>
+      <nav class="navbar">
+         <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all_books' %}">All Books</a></li>
+            <li><a href="{% url 'all_members' %}">All Members</a></li>
+            <li><a href="{% url 'login' %}">Log out</a></li>
+            <li><a href="{% url 'loans' %}">Loans</a></li>
+            <li><a href="{% url 'reg_member' %}">Register Member</a></li>
+            <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
+         </ul>
+     </nav>
+   
+      <div class="register-form">
+         {% if messages %}
+         <ul class="messages">
+         {% for message in messages %}
+            <li>{{ message }}</li>
+         {% endfor %}
+         </ul>
+      {% endif %}
+         <form action="" method="post">
+            {%csrf_token%}
+
+            <label>Name:</label><br />
+            <input type="text" name="name" /><br /><br />
+
+            <label>Email:</label><br />
+            <input type="email" name="email" /><br /><br />
+
+            <label>PHONE:</label><br />
+            <input type="tel" name="telephone" /><br /><br />
+            <input type="submit" value="Submit" />
+         </form>
+         
+      </div>
+   </body>
+</html>

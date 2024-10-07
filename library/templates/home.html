@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Library System - Main Page</title>
+   <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+   <div class="container">
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'all_books' %}">All Books</a></li>
+                <li><a href="{% url 'all_members' %}">All Members</a></li>
+                <li><a href="{% url 'login' %}">Log out</a></li>
+                <li><a href="{% url 'loans' %}">Loans</a></li>
+                <li><a href="{% url 'reg_member' %}">Register Member</a></li>
+                <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- Recently Borrowed Books Section -->
+            <section class="recent-borrowed">
+                <h2>Recently Borrowed Books</h2>
+                {% if recent_books %}
+                    <ul>
+                        {% for x in recent_books %}
+                        <li><strong>{{ x.book.title }}</strong> - Borrowed by {{ x.member.name }} on {{ x.loan_date }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No books have been borrowed in the last 3 days.</p>
+                {% endif %}
+            </section>
+
+            <!-- Overdue Books Section -->
+            <section class="overdue-books">
+                <h2>Overdue Books</h2>
+                {% if overdue_books %}
+                    <ul>
+                        {% for book in overdue_books %}
+                        <li><strong>{{ book.book.title }}</strong> - Borrowed by {{ book.member.name }} - Due on {{ book.return_date }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No overdue books.</p>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</body>
+</html>

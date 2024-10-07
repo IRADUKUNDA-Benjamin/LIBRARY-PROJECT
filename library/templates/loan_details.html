@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Loan Details</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+         <li><a href="{% url 'home' %}">Home</a></li>
+         <li><a href="{% url 'all_books' %}">All Books</a></li>
+         <li><a href="{% url 'all_members' %}">All Members</a></li>
+         <li><a href="{% url 'login' %}">Log out</a></li>
+         <li><a href="{% url 'loans' %}">Loans</a></li>
+         <li><a href="{% url 'reg_member' %}">Register Member</a></li>
+         <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
+        </ul>
+    </nav>
+    <div class="container loan_details">
+        <h1>Loan Details</h1>
+
+        <p>Member Id: {{ loa.member.id }}</p>
+        <p>Name: {{ loa.member.name }}</p>
+        <p>Email: {{ loa.member.email }}</p>
+        <p>Phone: {{ loa.member.phone }}</p>
+        <p>Membership Date: {{ loa.member.membership_date }}</p>
+
+        <p>Book Title: {{ loa.book.title }}</p>
+        <p>Book Author: {{ loa.book.author }}</p>
+        <p>Book Price: {{ loa.book.price }}</p>
+        <p>Book Genre: {{ loa.book.genre }}</p>
+        <p>Book ISBN: {{ loa.book.ISBN }}</p>
+        <p>Publication Date: {{ loa.book.publication_date }}</p>
+        <p>Copies Available: {{ loa.book.available_copies }}</p>
+
+        <p>Loan Date: {{ loa.loan_date }}</p>
+        <p>Return Date: {{ loa.return_date }}</p>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="submit" value="Remove Loan" class="remove-button">
+        </form>
+        {% if messages %}
+        <ul class="messages">
+           {% for message in messages %}
+           <li>{{ message }}</li>
+           {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

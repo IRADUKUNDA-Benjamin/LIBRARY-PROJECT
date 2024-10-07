@@ -1,0 +1,58 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel="stylesheet" href={% static 'style.css' %}>
+   </head>
+   <body>
+      <nav class="navbar">
+         <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all_books' %}">All Books</a></li>
+            <li><a href="{% url 'all_members' %}">All Members</a></li>
+            <li><a href="{% url 'login' %}">Log out</a></li>
+            <li><a href="{% url 'loans' %}">Loans</a></li>
+            <li><a href="{% url 'reg_member' %}">Register Member</a></li>
+            <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
+         </ul>
+     </nav>
+   
+      <div class="register-form">
+         {% if messages %}
+         <ul class="messages">
+         {% for message in messages %}
+            <li>{{ message }}</li>
+         {% endfor %}
+         </ul>
+      {% endif %}
+      
+         <form action="" method="post">
+            {%csrf_token%}
+
+            <label>Title:</label><br />
+            <input type="text" name="title" /><br /><br />
+
+            <label>Author:</label><br />
+            <input type="text" name="author" /><br /><br />
+
+            <label>price:</label><br />
+            <input type="text" name="price" /><br /><br />
+
+            <label>genre:</label><br />
+            <input type="text" name="genre" /><br /><br />
+
+            <label>ISBN:</label><br />
+            <input type="text" name="ISBN" /><br /><br />
+
+            <label>publication date: </label><br />
+            <input type="date" name="publication_date" /><br /><br />
+
+            <label>Copies Available:</label><br />
+            <input type="number" name="available_copies" /><br /><br />
+
+            <input type="submit" value="Submit" />
+         </form>
+         
+      </div>
+   </body>
+</html>

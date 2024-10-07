@@ -1,0 +1,31 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title></title>
+      <link rel="stylesheet" href="{% static 'style.css' %}">
+   </head>
+   <body>
+      <nav class="navbar">
+         <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all_books' %}">All Books</a></li>
+            <li><a href="{% url 'all_members' %}">All Members</a></li>
+            <li><a href="{% url 'login' %}">Log out</a></li>
+            <li><a href="{% url 'loans' %}">Loans</a></li>
+            <li><a href="{% url 'reg_member' %}">Register Member</a></li>
+            <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
+         </ul>
+     </nav>
+      <div class="container all-books">
+         <h1>LIST OF ALL BOOKS</h1>
+         <ul>
+            {% for x in books%}
+            <li><a href="/book_details/{{x.id}}"> {{x.title}} written by {{x.author}}<a></li>
+            {%endfor%}
+         </ul>
+         
+      </div>
+      <a href="{% url 'add_book'%}" class="button-link">ADD a BOOK</a>
+   </body>
+</html>
