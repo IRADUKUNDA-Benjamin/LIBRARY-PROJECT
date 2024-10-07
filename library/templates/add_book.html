@@ -15,17 +15,17 @@
             <li><a href="{% url 'reg_member' %}">Register Member</a></li>
             <li><a href="{% url 'loan_reg' %}">New Loan</a></li>
          </ul>
-     </nav>
-   
+      </nav>
+
       <div class="register-form">
          {% if messages %}
          <ul class="messages">
-         {% for message in messages %}
+            {% for message in messages %}
             <li>{{ message }}</li>
-         {% endfor %}
+            {% endfor %}
          </ul>
-      {% endif %}
-      
+         {% endif %}
+
          <form action="" method="post">
             {%csrf_token%}
 
@@ -52,7 +52,6 @@
 
             <input type="submit" value="Submit" />
          </form>
-         
       </div>
    </body>
 </html>
