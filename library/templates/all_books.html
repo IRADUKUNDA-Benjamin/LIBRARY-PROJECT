@@ -24,8 +24,8 @@
             <li><a href="/book_details/{{x.id}}"> {{x.title}} written by {{x.author}}<a></li>
             {%endfor%}
          </ul>
-         
+         <a href="{% url 'add_book'%}" class="button-link">ADD a BOOK</a>
       </div>
-      <a href="{% url 'add_book'%}" class="button-link">ADD a BOOK</a>
+
    </body>
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import Book, Member, Loan, Staff
+from .models import Book, Member, Loan, Staff,Genre
 from django.http import HttpResponse
 from django.template import loader
 from .forms import MemberForm
@@ -165,29 +165,51 @@ def delete_loan(request, id):
     return render(request, 'loan_details.html', context)
 
 def reg_book(request):
-   if request.method=='POST':
-      title=request.POST.get('title')
-      author=request.POST.get('author')
-      genre=request.POST.get('genre')
-      price=request.POST.get('price')
-      ISBN=request.POST.get('ISBN')
-      publication_date_str=request.POST.get('publication_date')
-      available_copies=request.POST.get('available_copies')
+   if request.method == 'POST':
+      title = request.POST.get('title')
+      author = request.POST.get('author')
+      genre_name = request.POST.get('genre')
+      price = request.POST.get('price')
+      ISBN = request.POST.get('ISBN')
+      publication_date_str = request.POST.get('publication_date')
+      available_copies = request.POST.get('available_copies')
 
       try:
-         existing=Book.objects.all().get(ISBN=ISBN)
+         existing_book = Book.objects.get(ISBN=ISBN)
+         messages.error(request, "Book is already registered")
+         return redirect('reg_book')
       except Book.DoesNotExist:
          try:
+                # Parse the publication date
             publication_date = datetime.strptime(publication_date_str, '%Y-%m-%d').date()
          except ValueError:
             messages.error(request, "Invalid date format for publication date")
             return redirect('reg_book')
-         book=Book(title=title,author=author,genre=genre,price=price,ISBN=ISBN,publication_date=publication_date,available_copies=available_copies)
+
+         try:
+                # Find the genre object based on the genre name
+            genre = Genre.objects.get(name=genre_name)
+         except Genre.DoesNotExist:
+            messages.error(request, "Genre not found")
+            return redirect('reg_book')
+
+            # Create a new Book instance and save it
+         book = Book(
+            title=title,
+            author=author,
+            genre=genre,
+            price=price,
+            ISBN=ISBN,
+            publication_date=publication_date,
+            available_copies=available_copies
+            )
          book.save()
-         messages.success(request,"book was successfully registered")
-      else:
-         messages.error(request,"book is arleady registered")
-      
-   template=loader.get_template("add_book.html")
-   context={}
+         messages.success(request, "Book was successfully registered")
+         return redirect('reg_book')
+
+    # Fetch all genres to display in the datalist
+   genres = Genre.objects.all()
+   template=loader.get_template('add_book.html')
+   context = {'genres': genres,}
+
    return HttpResponse(template.render(context,request))

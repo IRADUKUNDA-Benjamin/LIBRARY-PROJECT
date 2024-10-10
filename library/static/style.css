@@ -456,3 +456,45 @@ ul.messages li {
 .button-link:hover {
    background-color: #45a049;  /* Darker green on hover */
 }
+
+.book-form {
+   width: 60%;
+   margin: 40px auto;
+   padding: 30px;
+   background-color: #f7f7f7;
+   border-radius: 8px;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-form label {
+   font-weight: bold;
+   color: #333;
+   margin-top: 10px;
+   display: block;
+}
+
+.book-form input[type="text"],
+.book-form input[type="email"],
+.book-form input[type="date"],
+.book-form input[list="genres"] {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0 20px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   font-size: 16px;
+}
+
+.book-form input[type="submit"] {
+   background-color: #3498db;
+   color: white;
+   padding: 12px 25px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+}
+
+.book-form input[type="submit"]:hover {
+   background-color: #2980b9;
+}

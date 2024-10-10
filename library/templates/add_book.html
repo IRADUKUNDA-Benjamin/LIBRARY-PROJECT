@@ -1,8 +1,8 @@
-{%load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <link rel="stylesheet" href={% static 'style.css' %}>
+      <link rel="stylesheet" href="{% static 'style.css' %}">
    </head>
    <body>
       <nav class="navbar">
@@ -17,7 +17,7 @@
          </ul>
       </nav>
 
-      <div class="register-form">
+      <div class="book-form">
          {% if messages %}
          <ul class="messages">
             {% for message in messages %}
@@ -27,7 +27,7 @@
          {% endif %}
 
          <form action="" method="post">
-            {%csrf_token%}
+            {% csrf_token %}
 
             <label>Title:</label><br />
             <input type="text" name="title" /><br /><br />
@@ -35,22 +35,27 @@
             <label>Author:</label><br />
             <input type="text" name="author" /><br /><br />
 
-            <label>price:</label><br />
+            <label>Price:</label><br />
             <input type="text" name="price" /><br /><br />
 
-            <label>genre:</label><br />
-            <input type="text" name="genre" /><br /><br />
+            <label for="genre">Genre:</label>
+            <input list="genres" name="genre">
+            <datalist id="genres">
+              {% for gen in genres %}
+                <option value="{{ gen.name }}">
+              {% endfor %}
+            </datalist>
 
             <label>ISBN:</label><br />
             <input type="text" name="ISBN" /><br /><br />
 
-            <label>publication date: </label><br />
+            <label>Publication Date: </label><br />
             <input type="date" name="publication_date" /><br /><br />
 
             <label>Copies Available:</label><br />
             <input type="number" name="available_copies" /><br /><br />
 
-            <input type="submit" value="Submit" />
+            <input type="submit" value="REGISTER" />
          </form>
       </div>
    </body>
