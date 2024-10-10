@@ -6,6 +6,8 @@ from .forms import MemberForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from datetime import datetime,date
+from django.utils import timezone
+
 
 # Create your views here.
 def home(request):
@@ -95,7 +97,7 @@ def loan_registry(request):
          messages.error(request,"check  your date please")
          return redirect ('loan_reg')
       else:
-         loan=Loan(book=book,member=member,loan_date=loan_date,return_date=return_date)
+         loan=Loan(book=book,member=member,loan_date=loan_date,return_date=return_date,updated_at=timezone.now())
          loan.save()
          book.available_copies=book.available_copies-1
          messages.success(request, "Book loaned succesfully")
